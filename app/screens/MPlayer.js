@@ -4,17 +4,21 @@ import SoundPlayer from 'react-native-sound-player';
 
 const MPlayer = () => {
   const [isPlaying, setPlaying] = useState(false);
-  const player = SoundPlayer;
+  let player = SoundPlayer;
 
   useEffect(() => {
     player.loadUrl(
-      'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3'
+      'http://www.panacherock.com/downloads/mp3/01_Afterlife.mp3'
     );
+
+    () => {
+      player = null;
+    }
   }, [player]);
 
   return (
     <View style={styles.container}>
-      <Text>Working</Text>
+      <Text style={styles.title}>Music Player</Text>
 
       <View style={styles.playerContainer}>
         <TouchableOpacity
@@ -28,7 +32,7 @@ const MPlayer = () => {
             setPlaying(!isPlaying);
           }}
         >
-          <Text>Play</Text>
+          <Text>{isPlaying ? 'Pause' : 'Play'}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -38,6 +42,11 @@ const MPlayer = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 32
   },
   playerContainer: {
     position: 'absolute',
